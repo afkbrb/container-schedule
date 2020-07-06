@@ -98,7 +98,7 @@ foreach node
 	allocatablePods = { toAllocatePods 中能够放入当前 node 的 pod 组成的集合 }
 	
     while (allocatablePods 非空)
-  	 	从 allocatablePods 中找出一个 bestFit
+        从 allocatablePods 中找出一个 bestFit
     	将 bestFit 放入 node 中
     	从 toAllocatePods 移除 bestFit
     	重新计算 allocatablePods
