@@ -41,15 +41,12 @@ foreach node
 
 获取 bestFit 步骤如下：对于 allocatablePods 中的每个元素，假设将这个 pod 加入 node，计算加入之后 node 的 cpu 和 ram 资源的离散系数，最终选取使得离散系数最小的那个 pod。
 
-离散系数计算过程：假设某个 node 总共的 cpu 资源和 ram 资源分别为 $R_{cpu}$, 和 $R_{gpu}$，已经被消费的 cpu 和 ram 分别为 $C_{cpu}$和 $C_{ram}$，当前 pod 需要使用的 cpu 和 ram 就设为 cpu 和 ram，那么加入该 pod 后 cpu 的使用率 $x = (C_{cpu} + cpu) / R_{cpu}$，gpu 使用率为 $y = (C_{gpu} + gpu) / R_{gpu}$，容易推导离散系数如下：
-$$
-cov(x, y) = stdev(x, y) / avg(x, y) = ... = |x - y| / (x + y)
-$$
+离散系数计算过程：假设某个 node 总共的 cpu 资源和 ram 资源分别为 R1, 和 R2，已经被消费的 cpu 和 ram 分别为 C1 和  C2，当前 pod 需要使用的 cpu 和 ram 就设为 cpu 和 ram，那么加入该 pod 后 cpu 的使用率 x = (C1 + cpu) / R1，gpu 使用率为 y = (C2 + gpu) / R2，容易推导离散系数如下：cov(x, y) = stdev(x, y) / avg(x, y) = ... = |x - y| / (x + y)
 
 
 显然这题的关键在于要使得 cpu 和 ram 的利用率尽可能地接近，这样的话，两者能同时靠近 100%，从而减少一个资源先被耗尽导致另一个资源被浪费情况。
 
-当然，使用方差/标准差也能达到这个目的，但使用离散系数的话在上式中 $|x - y|$ 相同时会优先选取 $x + y$ 更大的那一个，也就是说会优先放入比较消耗资源的 pod，从而使得剩余的 pod 大都是不太消耗资源的，增加了其能够插入 node 的可能性（集合 allocatablePods中的元素会更多）。
+当然，使用方差/标准差也能达到这个目的，但使用离散系数的话在上式中 |x - y| 相同时会优先选取 x + y 更大的那一个，也就是说会优先放入比较消耗资源的 pod，从而使得剩余的 pod 大都是不太消耗资源的，增加了其能够插入 node 的可能性（集合 allocatablePods中的元素会更多）。
 
 这个方法能将 schedule 分数刷到 26 万左右，观察日志可以发现尾部的很多 node 只插入了 1、2 个 pod。这是因为这些 pod 所属的 group 的 pod 实例太多，它们都被留到了最后，而又由于题目约束了一个 group 在单个 node 上可分配的 pod 实例上限（其实要么是 1 要么是 2），即使在某个 node 资源充足的情况下，pod 也不能插入该 node。
 
