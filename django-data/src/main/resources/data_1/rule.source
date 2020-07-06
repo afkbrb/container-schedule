@@ -1,0 +1,1 @@
+{"defaultMaxInstancePerNode":2,"nodeResourceWeights":[{"resource":"GPU","weight":10},{"resource":"CPU","weight":2},{"resource":"RAM","weight":1}],"replicasMaxInstancePerNodes":[{"maxInstancePerNode":1,"replicas":100,"restrain":"le"}],"scoreWeight":{"coreBind":1,"migratePod":1,"groupMoreInstancePerNode":1,"sensitiveCpuBind":0,"socketCross":1},"timeLimitInMins":30}

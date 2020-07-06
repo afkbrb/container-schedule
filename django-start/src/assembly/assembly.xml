@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>../django-data/src/main/resources/</directory>
+            <outputDirectory>/config</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <lineEnding>unix</lineEnding>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
