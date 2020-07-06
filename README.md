@@ -92,10 +92,10 @@ foreach node
 
 ```
 foreach node
-	podsToMigrate = { 该 node 中所有不适合的 pod }
-	将 podsToMigrate 中的每个 pod 移到后面的 node 中
-	toAllocatePods = { 后面的所有 node 的 pod 中不适合的且能放入当前 node 的 pod 组成的集合 } // 后面和 schedule 很像
-	allocatablePods = { toAllocatePods 中能够放入当前 node 的 pod 组成的集合 }
+    podsToMigrate = { 该 node 中所有不适合的 pod }
+    将 podsToMigrate 中的每个 pod 移到后面的 node 中
+    toAllocatePods = { 后面的所有 node 的 pod 中不适合的且能放入当前 node 的 pod 组成的集合 } // 后面和 schedule 很像
+    allocatablePods = { toAllocatePods 中能够放入当前 node 的 pod 组成的集合 }
 	
     while (allocatablePods 非空)
         从 allocatablePods 中找出一个 bestFit
