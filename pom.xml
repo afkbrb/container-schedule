@@ -29,7 +29,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <log4j2.version>2.12.1</log4j2.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
 
         <maven-antrun.version>1.8</maven-antrun.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
